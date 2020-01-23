@@ -14,6 +14,6 @@ import edu.eci.arsw.math.PiDigits;
 public class CountThreadsMain {
     
     public static void main(String a[]) throws InterruptedException {
-        PiDigits.getDigits(0, 1000, 1);
+        PiDigits.getDigits(0, 1000, 3);
     }
 }

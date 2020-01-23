@@ -28,5 +28,9 @@ public class PiDigitThread extends Thread{
 	public byte[] getRes(){
 		return res;
 	}
+	
+	public void setEnd(int end){
+		this.end = end;
+	}
 
 }

@@ -18,11 +18,15 @@ public class PiDigits {
 	
 	public static void getDigits(int start, int count, int n) throws InterruptedException {
 		int div = count / n;
+		int mod = count % n;
 		int i = 0;
 		int s = start;
 		HashMap<Integer, PiDigitThread> a = new HashMap<Integer, PiDigitThread>();
 		while (i < n ){
-			PiDigitThread t = new PiDigitThread(s, s + div);
+			PiDigitThread t = new PiDigitThread(s, div);
+			if (i + 1 == n){
+				t.setEnd(div + mod);
+			}
 			a.put(i, t);
             t.start();
 			t.join();
