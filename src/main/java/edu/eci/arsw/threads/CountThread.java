@@ -5,28 +5,26 @@
  */
 package edu.eci.arsw.threads;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 /**
  *
  * @author hcadavid
  */
-@Data
-@AllArgsConstructor
-public class CountThread implements Runnable{
+public class CountThread implements Runnable {
+	
+	private int number1;
+	private int number2;
+	
+	public CountThread(int number1, int number2) {
+		this.number1=number1;
+		this.number2=number2;
+	}
 
-    private int start, end;
-
-    private void recorrido(int start, int end){
-        for (int i = start; i < end; i++){
-            System.out.println(i); 
-        }
-    }
-
-    @Override
-    public void run() {
-        recorrido(start, end);
-    }
-
+	@Override
+	public void run() {
+		for(int i=number1; i<=number2; i++) {
+			System.out.print(i+" ");
+		}
+		System.out.println();
+	}
+    
 }
