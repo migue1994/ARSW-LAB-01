@@ -4,14 +4,27 @@
 
 Change the beginning with start() to run(). How does the output change? Why?
 
+Al utilizar start () el resultado de los hilos aparecen combinados en la salida; por otro lado, con run (), las salidas de los hilos se dan en el orden en que fueron ejecutados. Esto se debe a que cuando se hace el llamado al método run() solo existe un hilo, es como si se llamara a un método normal; por otro lado en el caso de start(), para ejecutarlo se crean hilos distintos.
+
+![]()
+
 ##Part III - Performance Evaluation
 
 #1. Single thread
 
+![]()
+
+#2
+
+#3
+
 #4. 200 threads
+
+![]()
 
 #5. 500 threads 
 
+![]()
 
 #According to Amdahls law, where S (n) is the theoretical performance improvement, P the parallel fraction of the algorithm, and n the number of threads, the greater n, the greater the improvement should be. Why is the best performance not achieved with the 500 threads? How does this performance compare when 200 are used?
 
