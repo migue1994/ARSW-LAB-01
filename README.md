@@ -6,11 +6,11 @@
 
 Al utilizar start () el resultado de los hilos aparecen combinados en la salida; por otro lado, con run (), las salidas de los hilos se dan en el orden en que fueron ejecutados. Esto se debe a que cuando se hace el llamado al método run() solo existe un hilo, es como si se llamara a un método normal; por otro lado en el caso de start(), para ejecutarlo se crean hilos distintos.
 
-Resultado son start()
+Resultado con start()
 
 ![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/start.png)
 
-Resultado son run()
+Resultado con run()
 
 ![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/run.png)
 
@@ -20,9 +20,9 @@ Resultado son run()
 
 ![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/caso1.png)
 
-### 2
+### 2. As many threads as processing cores
 
-### 3
+### 3. So many threads as double processing cores
 
 ### 4. 200 threads
 
