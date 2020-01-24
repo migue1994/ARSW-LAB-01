@@ -22,11 +22,11 @@ Resultado con run()
 
 ### 2. As many threads as processing cores
 
-![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/cores.png)
+![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/cores.PNG)
 
 ### 3. So many threads as double processing cores
 
-![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/dcores.png)
+![](https://github.com/migue1994/ARSW-LAB-01/blob/master/img/dcores.PNG)
 
 ### 4. 200 threads
 
