@@ -9,25 +9,13 @@ import java.util.HashMap;
 ///  https://en.wikipedia.org/wiki/Bailey%E2%80%93Borwein%E2%80%93Plouffe_formula
 ///  *** Translated from C# code: https://github.com/mmoroney/DigitsOfPi ***
 ///  </summary>
-public class PiDigits extends Thread{
+public class PiDigits{
 
     private static int DigitsPerSum = 8;
     private static double Epsilon = 1e-17;
 
-    private int value;
-	private int numberAfterValues;
-	private byte[] arrayHecDig;	 
-	private ArrayList<byte[]>totalList;
-	private ArrayList<Integer>numbersCountStart;
-	private ArrayList<Integer>numbersCountEnd;
 	
-	public PiDigits() {
-		this.totalList=new ArrayList<byte[]>();
-		this.numbersCountStart=new ArrayList<Integer>();
-		this.numbersCountEnd=new ArrayList<Integer>();
-		
-	}
-    
+	    
     /**
      * Returns a range of hexadecimal digits of pi.
      * @param start The starting location of the range.
@@ -78,45 +66,28 @@ public class PiDigits extends Thread{
         return data;
     }
     
-    /**
-     * 
-     * @param list
-     * @param n
-     */
-    /*private static void inicializeList(ArrayList<byte[]> list, int n) {
-    	for(int i=0; i<n; i++) {
-    		byte[] listBytes=hexStringToByteArray("e04fd020ea3a6910a2d808002b30309d");
-    		list.add(listBytes);
-    	}
-    }*/
     
     /**
      * 
      * @param list
      * @param n
      */
-    public void inicializeListNumber(int inicio, int fin, int n) {
+    public static void inicializeListNumber(int inicio, int fin, int n, 
+    		ArrayList<Integer> numbersCountStart, ArrayList<Integer> numbersCountEnd) {
     	int divCount=fin/n;
     	int aux=inicio+divCount;
     	int start=inicio;
     	
     	for(int i=0; i<n; i++) {
-    		this.numbersCountEnd.add(aux);
-    		this.numbersCountStart.add(start);
+    		numbersCountEnd.add(aux);
+    		numbersCountStart.add(start);
     		start=aux+1;
     		aux+=divCount;
     	}
     	
-    	if(this.numbersCountEnd.get(n-1)!=fin) this.numbersCountEnd.set(n-1, fin);
+    	if(numbersCountEnd.get(n-1)!=fin) numbersCountEnd.set(n-1, fin);
     }
     
-    public ArrayList<Integer> getNumbersCountStart(){
-    	return this.numbersCountStart;
-    }
-    
-    public ArrayList<Integer> getNumbersCountEnd(){
-    	return this.numbersCountEnd;
-    }
     
     
     /**
@@ -126,52 +97,32 @@ public class PiDigits extends Thread{
      * @param numThreads
      * @throws InterruptedException
      */
-    public void getDigits(int start, int count, int numThreads) throws InterruptedException {
+    public static HashMap<Integer, PiDigitsThread> getDigits(int start, int count, int numThreads) throws InterruptedException {
     	
-    	//inicializeList(this.totalList,numThreads); 
-    	inicializeListNumber(start, start+count, numThreads);
+    	ArrayList<Integer>numbersCountStart=new ArrayList<Integer>();
+    	ArrayList<Integer>numbersCountEnd=new ArrayList<Integer>();
+    	HashMap<Integer, PiDigitsThread>threadsList=new HashMap<Integer, PiDigitsThread>();
     	
-    	this.value=start;
-    	
-    	ArrayList<Integer>w=getNumbersCountStart();
-    	ArrayList<Integer>q=getNumbersCountEnd();
-
-    	
-    	/*for(int j:w) {
-        	System.out.println(j);
-        }
-    	System.out.println();
-    	for(int j:q) {
-        	System.out.println(j);
-        }*/
-		
+    	inicializeListNumber(start, start+count, numThreads, numbersCountStart, numbersCountEnd);
     	
     	for(int i=0;i<numThreads;i++) {
     		
-    		this.run();
-    		this.join();
+    		int startValue=numbersCountStart.get(i);
+    		int countValue=numbersCountEnd.get(i)-startValue; 
     		
-    		/*totalList.add(this.arrayHecDig);
+    		if(countValue==0) countValue+=1;
     		
-    		this.value=numberAfterValues;*/
+    		PiDigitsThread piDigitsThread=new PiDigitsThread(startValue,countValue);
     		
+    		threadsList.put(i,piDigitsThread);
 
-    	
+    		piDigitsThread.start();
+    		piDigitsThread.join();
     	}
+    	
+    	return threadsList;
     }
     
-    /**
-     * 
-     */
-    //@Override
-    public void run() {
-    	totalList.add(getDigits(this.value, this.numberAfterValues));
-    }
-    
-    
-    public ArrayList<byte[]> getTotalList(){
-    	return this.totalList;
-    }
     
     
 
@@ -237,5 +188,6 @@ public class PiDigits extends Thread{
 
         return result;
     }
-
+    
+   
 }

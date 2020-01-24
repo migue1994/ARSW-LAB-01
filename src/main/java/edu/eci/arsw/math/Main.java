@@ -5,8 +5,12 @@
  */
 package edu.eci.arsw.math;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import edu.eci.arsw.threads.CountThread;
 
@@ -16,33 +20,19 @@ import edu.eci.arsw.threads.CountThread;
  */
 public class Main {
 
-    public static void main(String a[]) throws InterruptedException {
-    	PiDigits piDigit=new PiDigits();
-    	//piDigit.inicializeListNumber(0, 99, 5);
+    public static void main(String a[]) throws InterruptedException, FileNotFoundException { 
+    	PrintStream file=new PrintStream(new File("src/main/resources/file"));
     	
-    	/*ArrayList<Integer>w=piDigit.getNumbersCountStart();
-    	ArrayList<Integer>q=piDigit.getNumbersCountEnd();
-
-    	
-    	for(int i:w) {
-        	System.out.println(i);
-        }
-    	System.out.println();
-    	for(int i:q) {
-        	System.out.println(i);
-        }*/
-        
-    	piDigit.getDigits(0,99,3);
-        ArrayList<byte[]> total=piDigit.getTotalList();
-    	System.out.println(total.size());
-        
-    	for(int i=0;i<total.size();i++) {
-        	System.out.println(total.get(i));
-        	//System.out.println(i[]);
-        }
-    	
-    	
+		long ini=System.currentTimeMillis();
+		HashMap<Integer, PiDigitsThread> piDigits=PiDigits.getDigits(1,1000000,200);
+		long fin=System.currentTimeMillis();
+		System.out.println(fin-ini);
+		
+		for(int i=0;i<piDigits.size();i++) {
+			file.println(piDigits.get(i));
+		}
     }
+    
 
     private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
 

@@ -1,21 +1,29 @@
-/*package edu.eci.arsw.math;
+package edu.eci.arsw.math;
 
-public class PiDigitsThread implements Runnable{
+import java.awt.List;
+import java.util.ArrayList;
+
+public class PiDigitsThread extends Thread{
 	
 	private int value;
 	private int numberAfterValues;
 	private byte[] arrayHecDig;	    
 	    
 	public PiDigitsThread(int value, int numberAfterValues) {
-		this.numberAfterValues=value;
+		this.value=value;
 		this.numberAfterValues=numberAfterValues;
 	}
 	    
 	    
 	@Override
 	public void run() {
+		long ini=System.currentTimeMillis();
 		System.out.println("Thread was started");
-		this.arrayHecDig=PiDigits.getDigits(value, numberAfterValues);
+		System.out.println(this.value +" "+ this.numberAfterValues);
+
+		this.arrayHecDig=PiDigits.getDigits(this.value, this.numberAfterValues);
+		long fin=System.currentTimeMillis();
+		System.out.println(fin-ini);
 	}
 	
 	
@@ -30,4 +38,4 @@ public class PiDigitsThread implements Runnable{
 	public void setNumberAfterValues(int numberAfterValues) {
 		this.numberAfterValues=numberAfterValues;
 	}
-}*/
+}
