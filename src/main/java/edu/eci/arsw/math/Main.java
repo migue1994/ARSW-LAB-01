@@ -24,7 +24,7 @@ public class Main {
     	PrintStream file=new PrintStream(new File("src/main/resources/file"));
     	
 		long ini=System.currentTimeMillis();
-		HashMap<Integer, PiDigitsThread> piDigits=PiDigits.getDigits(1,1000000,200);
+		HashMap<Integer, PiDigitsThread> piDigits=PiDigits.getDigits(1,1000000,8);
 		long fin=System.currentTimeMillis();
 		System.out.println(fin-ini);
 		
